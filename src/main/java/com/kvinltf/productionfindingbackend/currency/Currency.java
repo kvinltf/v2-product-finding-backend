@@ -1,10 +1,10 @@
-package com.kvinltf.productionfindingbackend.model;
+package com.kvinltf.productionfindingbackend.currency;
 
+import com.kvinltf.productionfindingbackend.core.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @Entity
 @Table(name = "currencies")

@@ -1,4 +1,4 @@
-package com.kvinltf.productionfindingbackend.model;
+package com.kvinltf.productionfindingbackend.core;
 
 import jakarta.persistence.*;
 import lombok.Getter;
