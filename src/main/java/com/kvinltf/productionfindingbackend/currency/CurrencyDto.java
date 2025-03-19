@@ -11,6 +11,7 @@ import java.time.Instant;
 
 /**
  * DTO for {@link Currency}
+ * Contains all the fields from the Currency entity for data transfer purposes.
  */
 @Data
 @AllArgsConstructor
@@ -25,5 +26,7 @@ public class CurrencyDto implements Serializable {
     private String createdBy;
     private String lastModifiedBy;
     private String name;
-    private int decimal;
+    private String code;
+    private String symbol;
+    private Integer decimalPlaces;
 }
