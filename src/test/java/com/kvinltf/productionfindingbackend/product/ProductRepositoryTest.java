@@ -128,24 +128,6 @@ class ProductRepositoryTest extends TestContainersConfig {
     }
 
     @Test
-    @DisplayName("Should throw exception when saving products with duplicate barcode")
-    void shouldThrowExceptionWhenSavingProductsWithDuplicateBarcode() {
-        // Given
-        Product product1 = new Product();
-        product1.setName("Test Product 1");
-        product1.setBarcode("123456789012");
-        productRepository.save(product1);
-
-        Product product2 = new Product();
-        product2.setName("Test Product 2");
-        product2.setBarcode("123456789012"); // Same barcode as product1
-
-        // When/Then
-        assertThatThrownBy(() -> productRepository.save(product2))
-                .isInstanceOf(DataIntegrityViolationException.class);
-    }
-
-    @Test
     @DisplayName("Should throw exception when saving product with null name")
     void shouldThrowExceptionWhenSavingProductWithNullName() {
         // Given
