@@ -32,7 +32,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -47,7 +46,6 @@ class ProductTest {
         // Given
         Product product = new Product();
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -64,7 +62,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("");
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -81,7 +78,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("A".repeat(256)); // 256 characters
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -97,7 +93,6 @@ class ProductTest {
         // Given
         Product product = new Product();
         product.setName("Test Product");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -114,7 +109,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("");
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -131,7 +125,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("A".repeat(51)); // 51 characters
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -148,7 +141,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         // description is null
 
         // When
@@ -166,7 +158,6 @@ class ProductTest {
         product.setName("Test Product");
         product.setBarcode("123456789012");
         product.setDescription("A".repeat(1001)); // 1001 characters
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -183,7 +174,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         // brand is null
 
         // When
@@ -201,7 +191,6 @@ class ProductTest {
         product.setName("Test Product");
         product.setBarcode("123456789012");
         product.setBrand("A".repeat(101)); // 101 characters
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
@@ -218,7 +207,6 @@ class ProductTest {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         // category is null
 
         // When
@@ -236,7 +224,6 @@ class ProductTest {
         product.setName("Test Product");
         product.setBarcode("123456789012");
         product.setCategory("A".repeat(101)); // 101 characters
-        product.setActive(true);
 
         // When
         Set<ConstraintViolation<Product>> violations = validator.validate(product);

@@ -10,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.validation.ConstraintViolationException;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -37,10 +36,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         product.setDescription("Test description");
         product.setBrand("Test Brand");
         product.setCategory("Test Category");
-        product.setSku("SKU123");
-        product.setWeight(1.5);
-        product.setDimensions("10x20x30");
-        product.setActive(true);
 
         // When
         Product savedProduct = productRepository.save(product);
@@ -52,10 +47,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         assertThat(savedProduct.getDescription()).isEqualTo("Test description");
         assertThat(savedProduct.getBrand()).isEqualTo("Test Brand");
         assertThat(savedProduct.getCategory()).isEqualTo("Test Category");
-        assertThat(savedProduct.getSku()).isEqualTo("SKU123");
-        assertThat(savedProduct.getWeight()).isEqualTo(1.5);
-        assertThat(savedProduct.getDimensions()).isEqualTo("10x20x30");
-        assertThat(savedProduct.getActive()).isTrue();
     }
 
     @Test
@@ -65,7 +56,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When
         Product savedProduct = productRepository.save(product);
@@ -77,10 +67,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         assertThat(savedProduct.getDescription()).isNull();
         assertThat(savedProduct.getBrand()).isNull();
         assertThat(savedProduct.getCategory()).isNull();
-        assertThat(savedProduct.getSku()).isNull();
-        assertThat(savedProduct.getWeight()).isNull();
-        assertThat(savedProduct.getDimensions()).isNull();
-        assertThat(savedProduct.getActive()).isTrue();
     }
 
     @Test
@@ -90,7 +76,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         Product savedProduct = productRepository.save(product);
 
         // When
@@ -101,7 +86,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         assertThat(foundProduct.getId()).isEqualTo(savedProduct.getId());
         assertThat(foundProduct.getName()).isEqualTo("Test Product");
         assertThat(foundProduct.getBarcode()).isEqualTo("123456789012");
-        assertThat(foundProduct.getActive()).isTrue();
     }
 
     @Test
@@ -111,7 +95,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         Product savedProduct = productRepository.save(product);
 
         // When
@@ -126,7 +109,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         assertThat(updatedProduct.getBarcode()).isEqualTo("123456789012");
         assertThat(updatedProduct.getDescription()).isEqualTo("Added description");
         assertThat(updatedProduct.getBrand()).isEqualTo("Added Brand");
-        assertThat(updatedProduct.getActive()).isTrue();
     }
 
     @Test
@@ -136,7 +118,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         Product savedProduct = productRepository.save(product);
 
         // When
@@ -153,13 +134,11 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product1 = new Product();
         product1.setName("Test Product 1");
         product1.setBarcode("123456789012");
-        product1.setActive(true);
         productRepository.save(product1);
 
         Product product2 = new Product();
         product2.setName("Test Product 2");
         product2.setBarcode("123456789012"); // Same barcode as product1
-        product2.setActive(true);
 
         // When/Then
         assertThatThrownBy(() -> productRepository.save(product2))
@@ -172,7 +151,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         // Given
         Product product = new Product();
         product.setBarcode("123456789012");
-        product.setActive(true);
 
         // When/Then
         assertThatThrownBy(() -> productRepository.save(product))
@@ -186,7 +164,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         // Given
         Product product = new Product();
         product.setName("Test Product");
-        product.setActive(true);
 
         // When/Then
         assertThatThrownBy(() -> productRepository.save(product))
@@ -201,13 +178,11 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product1 = new Product();
         product1.setName("Test Product 1");
         product1.setBarcode("123456789012");
-        product1.setActive(true);
         productRepository.save(product1);
 
         Product product2 = new Product();
         product2.setName("Test Product 2");
         product2.setBarcode("987654321098");
-        product2.setActive(true);
         productRepository.save(product2);
 
         // When
@@ -225,13 +200,11 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product1 = new Product();
         product1.setName("Test Product 1");
         product1.setBarcode("123456789012");
-        product1.setActive(true);
         productRepository.save(product1);
 
         Product product2 = new Product();
         product2.setName("Test Product 2");
         product2.setBarcode("987654321098");
-        product2.setActive(true);
         productRepository.save(product2);
 
         // When
@@ -248,7 +221,6 @@ class ProductRepositoryTest extends TestContainersConfig {
         Product product = new Product();
         product.setName("Test Product");
         product.setBarcode("123456789012");
-        product.setActive(true);
         Product savedProduct = productRepository.save(product);
 
         // When
