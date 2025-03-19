@@ -13,9 +13,7 @@ import lombok.ToString;
  * Each product has a name, barcode, description, brand, category, and other related fields.
  */
 @Entity
-@Table(name = "products", uniqueConstraints = {
-    @UniqueConstraint(name = "uk_product_barcode", columnNames = "barcode")
-})
+@Table(name = "products")
 @Getter
 @Setter
 @ToString
@@ -57,30 +55,4 @@ public class Product extends BaseEntity {
     @Size(max = 100, message = "Product category must be less than 100 characters")
     @Column(length = 100)
     private String category;
-
-    /**
-     * The SKU (Stock Keeping Unit) of the product
-     */
-    @Size(max = 50, message = "Product SKU must be less than 50 characters")
-    @Column(length = 50)
-    private String sku;
-
-    /**
-     * The weight of the product (in grams)
-     */
-    @Column
-    private Double weight;
-
-    /**
-     * The dimensions of the product (length x width x height in cm)
-     */
-    @Size(max = 50, message = "Product dimensions must be less than 50 characters")
-    @Column(length = 50)
-    private String dimensions;
-
-    /**
-     * Whether the product is active
-     */
-    @Column(nullable = false)
-    private Boolean active = true;
 }

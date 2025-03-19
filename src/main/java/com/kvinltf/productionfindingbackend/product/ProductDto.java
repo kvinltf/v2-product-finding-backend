@@ -30,8 +30,4 @@ public class ProductDto implements Serializable {
     private String description;
     private String brand;
     private String category;
-    private String sku;
-    private Double weight;
-    private String dimensions;
-    private Boolean active;
 }

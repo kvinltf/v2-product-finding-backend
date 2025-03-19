@@ -27,16 +27,6 @@ public record ProductCreateRequest(
     String brand,
 
     @Size(max = 100, message = "Product category must be less than 100 characters")
-    String category,
-
-    @Size(max = 50, message = "Product SKU must be less than 50 characters")
-    String sku,
-
-    Double weight,
-
-    @Size(max = 50, message = "Product dimensions must be less than 50 characters")
-    String dimensions,
-
-    Boolean active
+    String category
 ) implements Serializable {
 }

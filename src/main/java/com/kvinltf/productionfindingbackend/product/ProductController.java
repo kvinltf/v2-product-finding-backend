@@ -34,10 +34,6 @@ public class ProductController {
         product.setDescription(request.description());
         product.setBrand(request.brand());
         product.setCategory(request.category());
-        product.setSku(request.sku());
-        product.setWeight(request.weight());
-        product.setDimensions(request.dimensions());
-        product.setActive(request.active() != null ? request.active() : true);
         return productRepository.save(product);
     }
 
@@ -82,10 +78,6 @@ public class ProductController {
         product.setDescription(request.description());
         product.setBrand(request.brand());
         product.setCategory(request.category());
-        product.setSku(request.sku());
-        product.setWeight(request.weight());
-        product.setDimensions(request.dimensions());
-        product.setActive(request.active());
         return productRepository.save(product);
     }
 
