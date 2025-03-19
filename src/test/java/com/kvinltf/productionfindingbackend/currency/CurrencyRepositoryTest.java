@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 
 import jakarta.validation.ConstraintViolationException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -194,5 +195,152 @@ class CurrencyRepositoryTest extends TestContainersConfig {
         assertThatThrownBy(() -> currencyRepository.save(currency))
                 .isInstanceOf(ConstraintViolationException.class)
                 .hasMessageContaining("Number of decimal places is required");
+    }
+
+    @Test
+    @DisplayName("Should find all currencies")
+    void shouldFindAllCurrencies() {
+        // Given
+        Currency currency1 = new Currency();
+        currency1.setName("US Dollar");
+        currency1.setCode("USD");
+        currency1.setSymbol("$");
+        currency1.setDecimalPlaces(2);
+        currencyRepository.save(currency1);
+
+        Currency currency2 = new Currency();
+        currency2.setName("Euro");
+        currency2.setCode("EUR");
+        currency2.setSymbol("€");
+        currency2.setDecimalPlaces(2);
+        currencyRepository.save(currency2);
+
+        // When
+        Iterable<Currency> currencies = currencyRepository.findAll();
+
+        // Then
+        assertThat(currencies).hasSize(2);
+        assertThat(currencies).extracting(Currency::getCode).containsExactlyInAnyOrder("USD", "EUR");
+    }
+
+    @Test
+    @DisplayName("Should count currencies")
+    void shouldCountCurrencies() {
+        // Given
+        Currency currency1 = new Currency();
+        currency1.setName("US Dollar");
+        currency1.setCode("USD");
+        currency1.setSymbol("$");
+        currency1.setDecimalPlaces(2);
+        currencyRepository.save(currency1);
+
+        Currency currency2 = new Currency();
+        currency2.setName("Euro");
+        currency2.setCode("EUR");
+        currency2.setSymbol("€");
+        currency2.setDecimalPlaces(2);
+        currencyRepository.save(currency2);
+
+        // When
+        long count = currencyRepository.count();
+
+        // Then
+        assertThat(count).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("Should check if currency exists by id")
+    void shouldCheckIfCurrencyExistsById() {
+        // Given
+        Currency currency = new Currency();
+        currency.setName("US Dollar");
+        currency.setCode("USD");
+        currency.setSymbol("$");
+        currency.setDecimalPlaces(2);
+        Currency savedCurrency = currencyRepository.save(currency);
+
+        // When
+        boolean exists = currencyRepository.existsById(savedCurrency.getId());
+        boolean nonExists = currencyRepository.existsById(999L);
+
+        // Then
+        assertThat(exists).isTrue();
+        assertThat(nonExists).isFalse();
+    }
+
+    @Test
+    @DisplayName("Should delete currency by id")
+    void shouldDeleteCurrencyById() {
+        // Given
+        Currency currency = new Currency();
+        currency.setName("US Dollar");
+        currency.setCode("USD");
+        currency.setSymbol("$");
+        currency.setDecimalPlaces(2);
+        Currency savedCurrency = currencyRepository.save(currency);
+
+        // When
+        currencyRepository.deleteById(savedCurrency.getId());
+
+        // Then
+        assertThat(currencyRepository.findById(savedCurrency.getId())).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Should delete all currencies")
+    void shouldDeleteAllCurrencies() {
+        // Given
+        Currency currency1 = new Currency();
+        currency1.setName("US Dollar");
+        currency1.setCode("USD");
+        currency1.setSymbol("$");
+        currency1.setDecimalPlaces(2);
+        currencyRepository.save(currency1);
+
+        Currency currency2 = new Currency();
+        currency2.setName("Euro");
+        currency2.setCode("EUR");
+        currency2.setSymbol("€");
+        currency2.setDecimalPlaces(2);
+        currencyRepository.save(currency2);
+
+        // When
+        currencyRepository.deleteAll();
+
+        // Then
+        assertThat(currencyRepository.count()).isZero();
+    }
+
+    @Test
+    @DisplayName("Should find all currencies by id")
+    void shouldFindAllCurrenciesById() {
+        // Given
+        Currency currency1 = new Currency();
+        currency1.setName("US Dollar");
+        currency1.setCode("USD");
+        currency1.setSymbol("$");
+        currency1.setDecimalPlaces(2);
+        Currency savedCurrency1 = currencyRepository.save(currency1);
+
+        Currency currency2 = new Currency();
+        currency2.setName("Euro");
+        currency2.setCode("EUR");
+        currency2.setSymbol("€");
+        currency2.setDecimalPlaces(2);
+        Currency savedCurrency2 = currencyRepository.save(currency2);
+
+        Currency currency3 = new Currency();
+        currency3.setName("British Pound");
+        currency3.setCode("GBP");
+        currency3.setSymbol("£");
+        currency3.setDecimalPlaces(2);
+        Currency savedCurrency3 = currencyRepository.save(currency3);
+
+        // When
+        Iterable<Currency> currencies = currencyRepository.findAllById(List.of(savedCurrency1.getId(), savedCurrency3.getId()));
+
+        // Then
+        assertThat(currencies).hasSize(2);
+        assertThat(currencies).extracting(Currency::getCode).containsExactlyInAnyOrder("USD", "GBP");
     }
 }
