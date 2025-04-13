@@ -63,7 +63,9 @@ public class ProductController {
         product.setBrand(request.brand());
         product.setCategory(request.category());
         Product save = productRepository.save(product);
-        return ResponseEntity.ok(save);
+        return ResponseEntity.ok()
+                .lastModified(save.getLastModifiedDate())
+                .body(save);
     }
 
     @DeleteMapping("/{id}")
