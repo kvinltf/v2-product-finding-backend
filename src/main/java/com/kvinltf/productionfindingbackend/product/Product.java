@@ -30,29 +30,24 @@ public class Product extends BaseEntity {
     /**
      * The barcode of the product (e.g., UPC, EAN)
      */
-    @NotBlank(message = "Product barcode is required")
-    @Size(max = 50, message = "Product barcode must be less than 50 characters")
-    @Column(nullable = false)
+    @Column
     private String barcode;
 
     /**
      * The description of the product
      */
-    @Size(max = 1000, message = "Product description must be less than 1000 characters")
-    @Column(length = 1000)
+    @Column(columnDefinition = "text")
     private String description;
 
     /**
      * The brand of the product
      */
-    @Size(max = 100, message = "Product brand must be less than 100 characters")
-    @Column(length = 100)
+    @Column
     private String brand;
 
     /**
      * The category of the product
      */
-    @Size(max = 100, message = "Product category must be less than 100 characters")
-    @Column(length = 100)
+    @Column
     private String category;
 }
