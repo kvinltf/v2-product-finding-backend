@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1742400100601-3
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: code
+                  type: VARCHAR(3)
+              - column:
+                  name: decimal_places
+                  type: INT
+              - column:
+                  name: symbol
+                  type: VARCHAR(5)
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-4
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: code
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-6
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: decimal_places
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-8
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: code
+            constraintName: uk_currency_code
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-9
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: decimal
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-1
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - modifyDataType:
+            columnName: name
+            newDataType: VARCHAR(100)
+            tableName: currencies
+  - changeSet:
+      id: 1742400100601-2
+      author: kevin.lu
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnDataType: VARCHAR(100)
+            columnName: name
+            tableName: currencies
+            validate: true
+
