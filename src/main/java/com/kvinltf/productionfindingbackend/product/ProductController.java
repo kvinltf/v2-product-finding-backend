@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
@@ -30,10 +31,8 @@ public class ProductController {
         product.setBrand(request.brand());
         product.setCategory(request.category());
         Product save = productRepository.save(product);
-//        ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(save.getId()).toUri();
-        return ResponseEntity.created(
-                URI.create("/products/%s".formatted(save.getId()))
-        ).body(save);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(save.getId()).toUri();
+        return ResponseEntity.created(uri).body(save);
     }
 
     @GetMapping
