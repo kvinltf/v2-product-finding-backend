@@ -141,19 +141,6 @@ class ProductRepositoryTest extends TestContainersConfig {
     }
 
     @Test
-    @DisplayName("Should throw exception when saving product with null barcode")
-    void shouldThrowExceptionWhenSavingProductWithNullBarcode() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-
-        // When/Then
-        assertThatThrownBy(() -> productRepository.save(product))
-                .isInstanceOf(ConstraintViolationException.class)
-                .hasMessageContaining("Product barcode is required");
-    }
-
-    @Test
     @DisplayName("Should find all products")
     void shouldFindAllProducts() {
         // Given

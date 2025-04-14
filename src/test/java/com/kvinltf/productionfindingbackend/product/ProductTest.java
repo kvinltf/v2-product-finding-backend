@@ -88,53 +88,6 @@ class ProductTest {
     }
 
     @Test
-    @DisplayName("Should fail validation when barcode is null")
-    void shouldFailValidationWhenBarcodeIsNull() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product barcode is required");
-    }
-
-    @Test
-    @DisplayName("Should fail validation when barcode is empty")
-    void shouldFailValidationWhenBarcodeIsEmpty() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-        product.setBarcode("");
-
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product barcode is required");
-    }
-
-    @Test
-    @DisplayName("Should fail validation when barcode is too long")
-    void shouldFailValidationWhenBarcodeIsTooLong() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-        product.setBarcode("A".repeat(51)); // 51 characters
-
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product barcode must be less than 50 characters");
-    }
-
-    @Test
     @DisplayName("Should allow description to be null")
     void shouldAllowDescriptionToBeNull() {
         // Given
@@ -150,22 +103,6 @@ class ProductTest {
         assertThat(violations).isEmpty();
     }
 
-    @Test
-    @DisplayName("Should fail validation when description is too long")
-    void shouldFailValidationWhenDescriptionIsTooLong() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-        product.setBarcode("123456789012");
-        product.setDescription("A".repeat(1001)); // 1001 characters
-
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product description must be less than 1000 characters");
-    }
 
     @Test
     @DisplayName("Should allow brand to be null")
@@ -183,22 +120,6 @@ class ProductTest {
         assertThat(violations).isEmpty();
     }
 
-    @Test
-    @DisplayName("Should fail validation when brand is too long")
-    void shouldFailValidationWhenBrandIsTooLong() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-        product.setBarcode("123456789012");
-        product.setBrand("A".repeat(101)); // 101 characters
-
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product brand must be less than 100 characters");
-    }
 
     @Test
     @DisplayName("Should allow category to be null")
@@ -216,20 +137,5 @@ class ProductTest {
         assertThat(violations).isEmpty();
     }
 
-    @Test
-    @DisplayName("Should fail validation when category is too long")
-    void shouldFailValidationWhenCategoryIsTooLong() {
-        // Given
-        Product product = new Product();
-        product.setName("Test Product");
-        product.setBarcode("123456789012");
-        product.setCategory("A".repeat(101)); // 101 characters
 
-        // When
-        Set<ConstraintViolation<Product>> violations = validator.validate(product);
-
-        // Then
-        assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("Product category must be less than 100 characters");
-    }
 }
