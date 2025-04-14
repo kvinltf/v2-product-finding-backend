@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1742424075257-1
+      id: 1744637171992-1
       author: kevin.lu
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
       changes:
@@ -35,18 +35,16 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(255)
               - column:
-                  constraints:
-                    nullable: false
                   name: barcode
-                  type: VARCHAR(50)
+                  type: VARCHAR(255)
               - column:
                   name: description
-                  type: VARCHAR(1000)
+                  type: text
               - column:
                   name: brand
-                  type: VARCHAR(100)
+                  type: VARCHAR(255)
               - column:
                   name: category
-                  type: VARCHAR(100)
+                  type: VARCHAR(255)
             tableName: products
 
